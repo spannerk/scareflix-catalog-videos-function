@@ -20,7 +20,7 @@ def get_keywords(metadata):
 
 
 def get_trigger_warnings(doc, collection_ref):
-    metadata_id = doc.to_dict().get('ddtd_metadata_id')
+    metadata_id = doc.to_dict().get('dtdd_metadata_id')
     if metadata_id:
         metadata_ref = collection_ref.document(metadata_id)
         metadata = metadata_ref.get()
@@ -35,4 +35,4 @@ def get_videos(request):
     return [{'id':doc.id,
                 'data': doc.to_dict(),
                 'metadata': get_metadata(doc, db.collection("tmdb_metadata")), 
-                'trigger_warnings': get_trigger_warnings(doc, db.collection("ddtd_metadata"))} for doc in col_ref.get()]
+                'trigger_warnings': get_trigger_warnings(doc, db.collection("dtdd_metadata"))} for doc in col_ref.get()]
