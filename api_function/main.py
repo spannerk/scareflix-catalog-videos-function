@@ -7,8 +7,17 @@ def get_metadata(doc, collection_ref):
         metadata_ref = collection_ref.document(metadata_id)
         metadata = metadata_ref.get()
         if metadata.exists:
-            return metadata.to_dict()
+            return_val = metadata.to_dict()
+            return_val['keywords'] = get_keywords(metadata)
+            return return_val
     return None
+
+def get_keywords(metadata):
+    keywords = metadata.get('keywords')
+    if keywords:
+        return [k['name'] for k in keywords['keywords']]
+    return []
+
 
 def get_trigger_warnings(doc, collection_ref):
     metadata_id = doc.to_dict().get('ddtd_metadata_id')
