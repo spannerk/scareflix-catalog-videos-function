@@ -8,7 +8,7 @@ def get_metadata(doc, collection_ref):
         metadata = metadata_ref.get()
         if metadata.exists:
             return_val = metadata.to_dict()
-            return_val['keywords'] = get_keywords(metadata['data'])
+            return_val['keywords'] = get_keywords(metadata.to_dict()['data'])
             return return_val
     return None
 
